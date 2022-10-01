@@ -1,17 +1,30 @@
-def get_lucky_tickets(a, b):
-    """Return lucky tickets (even digits = odd digits) 
-    Args:
-        - list[int]: lucky tickets  from a to b
-    """
-    lucky_tickets = []
-    for i in range(a, b + 1):
-        digits = 0
-        number = i
-        while number > 0:
-            if number % 10 % 2 == 0:
-                digits += 1
-            number //= 10
-        if 2 * digits == len(str(i)):
-            lucky_tickets.append(i)
-    return lucky_tickets
-print(get_lucky_tickets(*list(map(int, input('Input range limits via space -->').split()))))
+DAYS_IN_MONTH = {
+    1: 31,
+    2: 28,
+    3: 31,
+    4: 30,
+    5: 31,
+    6: 30,
+    7: 31,
+    8: 31,
+    9: 30,
+    10: 31,
+    11: 30,
+    12: 31,
+}  
+ 
+def next_date(day, month, year):
+    day += 1
+    if day > DAYS_IN_MONTH[month]:
+        day = 1
+        month += 1
+    if month == 13:
+        month = 1
+        year += 1
+    return day, month, year
+
+day, month, year = map(
+    int,
+    input('Введите дату напр.24.09.2022 ->').split('.')
+)
+print(next_date(day,month, year))
